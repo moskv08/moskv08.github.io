@@ -38,55 +38,6 @@ export default function SceneManager(canvas) {
     return sceneSubjects;
   }
 
-  // // Create Sphere
-  // // -------------
-  // const sphereGeometry = new THREE.SphereBufferGeometry(5, 50, 50);
-  // const shaderMaterial = new THREE.ShaderMaterial({
-  //   vertexShader,
-  //   fragmentShader,
-  //   uniforms: {
-  //     globeTexture: {
-  //       value: new THREE.TextureLoader().load('./img/globe.jpg')
-  //     }
-  //   }
-  // });
-  // const sphere = new THREE.Mesh(sphereGeometry, shaderMaterial);
-
-  // // Create Atmosphere
-  // // -----------------
-  // const atmosphereGeometry = new THREE.SphereBufferGeometry(5, 50, 50);
-  // const atmosphereShaderMaterial = new THREE.ShaderMaterial({
-  //   vertexShader: atmosphereVertexShader,
-  //   fragmentShader: atmosphereFragmentShader,
-  //   blending: THREE.AdditiveBlending,
-  //   side: THREE.BackSide
-  // });
-  // const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereShaderMaterial);
-  // scene.add(atmosphere);
-
-  // // Create Star Points
-  // // ------------------
-  // const starGeometry = new THREE.BufferGeometry(5, 50, 50);
-  // const starMaterial = new THREE.PointsMaterial({ color: 0xffffff });
-  // const stars = new THREE.Points(starGeometry, starMaterial);
-  // scene.add(stars);
-
-  // const starVertices = [];
-  // for (let index = 0; index < 10000; index++) {
-  //   const x = (Math.random() - 0.5) * 2000;
-  //   const y = (Math.random() - 0.5) * 2000;
-  //   const z = -Math.random() * 10000;
-  //   starVertices.push(x, y, z);
-  // }
-
-  // starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
-
-  // // Create Scene group
-  // // ------------------
-  // const group = new THREE.Group();
-  // group.add(sphere)
-  // scene.add(group);
-
   camera.position.z = 15;
 
   function buildScene() {
@@ -114,22 +65,6 @@ export default function SceneManager(canvas) {
 
     return camera;
   }
-
-  // const mouse = { x: 0, y: 0 }
-
-  // function animate() {
-  //   requestAnimationFrame(animate)
-  //   renderer.render(scene, camera)
-  //   sphere.rotation.y += 0.002
-
-  //   gsap.to(group.rotation, {
-  //     x: mouse.y * 0.1,
-  //     y: mouse.x * 0.5,
-  //     duration: 2
-  //   });
-  // }
-  // animate();
-
 
   // Spin Sphere
   addEventListener('mousemove', event => {

@@ -21,5 +21,5 @@ function bindEventListener(){
 
 function render(){
   requestAnimationFrame(render);
-  sceneManager
+  sceneManager.update();
 }
