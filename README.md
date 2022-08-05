@@ -19,4 +19,10 @@ npm install
 npm run dev
 ```
 
+## Demo
+
+![3D Globe](./readme-img.png)
+
+Check out the final application [here](https://moskv08.github.io/vite-3dglobe-threejs/).
+
 Have fun!
