@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 import gsap from 'gsap';
-import vertexShader from './shaders/globe/vertex.glsl'
-import fragmentShader from './shaders/globe/fragment.glsl'
+import vertexShader from '../shaders/globe/vertex.glsl'
+import fragmentShader from '../shaders/globe/fragment.glsl'
 
-import atmosphereVertexShader from './shaders/atmosphere/vertex.glsl'
-import atmosphereFragmentShader from './shaders/atmosphere/fragment.glsl'
+import atmosphereVertexShader from '../shaders/atmosphere/vertex.glsl'
+import atmosphereFragmentShader from '../shaders/atmosphere/fragment.glsl'
 
 export default function SceneManager(){
 
@@ -19,6 +19,8 @@ export default function SceneManager(){
   const scene = buildScene();
   const renderer = buildRender(screenDimensions);
   const camera = buildCamera(screenDimensions);
+
+  const sceneObjects = [];
 
   // Create Sphere
   // -------------
