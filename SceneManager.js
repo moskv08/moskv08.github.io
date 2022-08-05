@@ -131,7 +131,6 @@ export default function SceneManager(){
       z: 15,
       duration: 3
     });
-    console.log(event);
   });
 
   addEventListener('resize', () => {
