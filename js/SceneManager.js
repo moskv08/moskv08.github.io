@@ -7,6 +7,7 @@
 */
 
 import * as THREE from 'three';
+import gsap from 'gsap';
 import GlobeSphere from './scene_objects/GlobeSphere';
 import AtmoSphere from './scene_objects/AtmoSphere';
 import StarVertice from './scene_objects/StarVertice';
@@ -68,59 +69,35 @@ export default function SceneManager(canvas) {
 
     return sceneSubjects;
   }
-  
-  // Spin Sphere
-  // addEventListener('mousemove', event => {
-  //   mouse.x = (event.clientX / screenDimensions.width) * 2 - 1;
-  //   mouse.y = (event.clientY / screenDimensions.height) * 2 + 1;
-  // });
-
-  // addEventListener('mousedown', event => {
-  //   gsap.to(camera.position, {
-  //     z: 13,
-  //     duration: 2
-  //   });
-  // });
-
-  // addEventListener('mouseup', event => {
-  //   gsap.to(camera.position, {
-  //     z: 15,
-  //     duration: 3
-  //   });
-  // });
-
-  // addEventListener('resize', () => {
-  //   camera.aspect = window.innerWidth / window.innerHeight;
-  //   camera.updateProjectionMatrix();
-
-  //   renderer.setSize(window.innerWidth, window.innerHeight);
-
-  // });
 
   this.onWindowResize = function () {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 
     renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // !ISSUE
+    //   const { width, height } = canvas;
+
+    //   screenDimensions.width = width;
+    //   screenDimensions.height = height;
+
+    //   camera.aspect = width / height;
+    //   camera.updateProjectionMatrix;
+
+    //   renderer.setSize(width, height);
   }
 
+  this.onMouseMove = function (event) {
+    mouse.x = (event.clientX / screenDimensions.width) * 2 - 1;
+    mouse.y = (event.clientY / screenDimensions.height) * 2 + 1;
+  }
 
-  // this.onWindowResize = function () {
-  //   // ISSUE
-  //   const { width, height } = canvas;
-    
-  //   screenDimensions.width = width;
-  //   screenDimensions.height = height;
-    
-  //   camera.aspect = width / height;
-  //   camera.updateProjectionMatrix;
-
-  //   renderer.setSize(width, height);
-
-  // }
-
-  this.onClick = function () {
-
+  this.onMouseClick = function (zoom, duration) {
+    gsap.to(camera.position, {
+      z: zoom,
+      duration: duration
+    });
   }
 
   // Calls the update() function of every SceneSubject
