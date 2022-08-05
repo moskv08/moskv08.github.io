@@ -7,12 +7,13 @@
 */
 
 import * as THREE from 'three';
-import gsap from 'gsap';
 import GlobeSphere from './scene_objects/GlobeSphere';
 import AtmoSphere from './scene_objects/AtmoSphere';
 import StarVertice from './scene_objects/StarVertice';
 
 export default function SceneManager(canvas) {
+
+  const mouse = { x: 0, y: 0 }
 
   const screenDimensions = {
     // width: canvas.width,
@@ -21,36 +22,28 @@ export default function SceneManager(canvas) {
     height: innerHeight
   }
 
-  const mouse = { x: 0, y: 0 }
-
   const scene = buildScene();
   const renderer = buildRender(screenDimensions);
   const camera = buildCamera(screenDimensions);
   const sceneSubjects = createSceneSubjects(scene, mouse);
 
-  function createSceneSubjects(scene, mouse) {
-    const sceneSubjects = [
-      new GlobeSphere(scene, mouse),
-      new AtmoSphere(scene),
-      new StarVertice(scene)
-    ];
-
-    return sceneSubjects;
-  }
-
   camera.position.z = 15;
 
   function buildScene() {
     const scene = new THREE.Scene();
+    scene.background = new THREE.Color("#000");
+
     return scene;
   }
 
   function buildRender({ width, height }) {
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
     const DPR = (window.devicePixelRatio) ? window.devicePixelRatio : 1;
     renderer.setPixelRatio(DPR);
     renderer.setSize(width, height);
-    document.body.appendChild(renderer.domElement);
+
+    renderer.gammaInput = true;
+    renderer.gammaOutput = true;
 
     return renderer;
   }
@@ -66,37 +59,65 @@ export default function SceneManager(canvas) {
     return camera;
   }
 
+  function createSceneSubjects(scene, mouse) {
+    const sceneSubjects = [
+      new GlobeSphere(scene, mouse),
+      new AtmoSphere(scene),
+      new StarVertice(scene)
+    ];
+
+    return sceneSubjects;
+  }
+  
   // Spin Sphere
-  addEventListener('mousemove', event => {
-    mouse.x = (event.clientX / screenDimensions.width) * 2 - 1;
-    mouse.y = (event.clientY / screenDimensions.height) * 2 + 1;
-  });
+  // addEventListener('mousemove', event => {
+  //   mouse.x = (event.clientX / screenDimensions.width) * 2 - 1;
+  //   mouse.y = (event.clientY / screenDimensions.height) * 2 + 1;
+  // });
 
-  addEventListener('mousedown', event => {
-    gsap.to(camera.position, {
-      z: 13,
-      duration: 2
-    });
-  });
+  // addEventListener('mousedown', event => {
+  //   gsap.to(camera.position, {
+  //     z: 13,
+  //     duration: 2
+  //   });
+  // });
 
-  addEventListener('mouseup', event => {
-    gsap.to(camera.position, {
-      z: 15,
-      duration: 3
-    });
-  });
+  // addEventListener('mouseup', event => {
+  //   gsap.to(camera.position, {
+  //     z: 15,
+  //     duration: 3
+  //   });
+  // });
 
-  addEventListener('resize', () => {
+  // addEventListener('resize', () => {
+  //   camera.aspect = window.innerWidth / window.innerHeight;
+  //   camera.updateProjectionMatrix();
+
+  //   renderer.setSize(window.innerWidth, window.innerHeight);
+
+  // });
+
+  this.onWindowResize = function () {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
 
     renderer.setSize(window.innerWidth, window.innerHeight);
-
-  });
-
-  this.onWindowsResize = function () {
-
   }
+
+
+  // this.onWindowResize = function () {
+  //   // ISSUE
+  //   const { width, height } = canvas;
+    
+  //   screenDimensions.width = width;
+  //   screenDimensions.height = height;
+    
+  //   camera.aspect = width / height;
+  //   camera.updateProjectionMatrix;
+
+  //   renderer.setSize(width, height);
+
+  // }
 
   this.onClick = function () {
 
