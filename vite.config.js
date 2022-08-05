@@ -6,5 +6,5 @@ export default defineConfig ({
   plugins: [
     vitePluginString.default(), 
   ],
-  base: "./"
+  base: "/vite-3dglobe-threejs/"
 });
