@@ -5,27 +5,17 @@
     1.  update()
     2.  onWindowResize()
 */
-
 import * as THREE from 'three';
 import gsap from 'gsap';
-import GlobeSphere from './scene_objects/GlobeSphere';
-import AtmoSphere from './scene_objects/AtmoSphere';
-import StarVertice from './scene_objects/StarVertice';
+import { GlobeSphere, AtmoSphere, StarVertice } from './scene_objects/SceneSubjects';
 
 export default function SceneManager(canvas) {
 
   const mouse = { x: 0, y: 0 }
 
-  const screenDimensions = {
-    // width: canvas.width,
-    // height: canvas.height
-    width: innerWidth,
-    height: innerHeight
-  }
-
   const scene = buildScene();
-  const renderer = buildRender(screenDimensions);
-  const camera = buildCamera(screenDimensions);
+  const renderer = buildRender(canvas);
+  const camera = buildCamera(canvas);
   const sceneSubjects = createSceneSubjects(scene, mouse);
 
   camera.position.z = 15;
@@ -71,26 +61,20 @@ export default function SceneManager(canvas) {
   }
 
   this.onWindowResize = function () {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    const { width, height } = canvas;
+
+    camera.aspect = width / height;
     camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
-
-    // !ISSUE
-    //   const { width, height } = canvas;
-
-    //   screenDimensions.width = width;
-    //   screenDimensions.height = height;
-
-    //   camera.aspect = width / height;
-    //   camera.updateProjectionMatrix;
-
-    //   renderer.setSize(width, height);
+    renderer.setSize(width, height);
   }
 
   this.onMouseMove = function (event) {
-    mouse.x = (event.clientX / screenDimensions.width) * 2 - 1;
-    mouse.y = (event.clientY / screenDimensions.height) * 2 + 1;
+
+    const { width, height } = canvas;
+
+    mouse.x = (event.clientX / width) * 2 - 1;
+    mouse.y = (event.clientY / height) * 2 + 1;
   }
 
   this.onMouseClick = function (zoom, duration) {

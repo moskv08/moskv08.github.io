@@ -16,11 +16,11 @@ bindEventListener();
 render();
 
 function bindEventListener(){
-  window.onresize = () => { sceneManager.onWindowResize()};
+  window.onresize = resizeCanvas;
   window.onmousemove = (event) => { sceneManager.onMouseMove(event)}
   window.onmousedown = () => { sceneManager.onMouseClick(13, 2)};
   window.onmouseup = () => { sceneManager.onMouseClick(15, 3)};
-    // resizeCanvas();
+  resizeCanvas();
 }
 
 function render(){
@@ -28,14 +28,15 @@ function render(){
   sceneManager.update();
 }
 
-// function resizeCanvas(){
+function resizeCanvas(){
+  // canvas.width = window.innerWidth;
+  // canvas.height = window.innerHeight;
+  canvas.style.width = '100%';
+  canvas.style.height = '100%';
 
-//   // canvas.style.width = '100%';
-//   // canvas.style.height = '100%';
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
 
-//   // canvas.width = canvas.offsetWidth;
-//   // canvas.height = canvas.offsetHeight;
-
-//   sceneManager.onWindowResize();
-// }
+  sceneManager.onWindowResize();
+}
 
