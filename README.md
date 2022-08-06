@@ -1,6 +1,8 @@
 # Three.js App - 3D Globe
 
-## Overview
+![3D Globe](./readme-img.png)
+
+### Overview
 
 Spinning Globe with Atmosphere in space. Created by use of:
 
@@ -18,10 +20,6 @@ npm install
 
 npm run dev
 ```
-
-## Demo
-
-![3D Globe](./readme-img.png)
 
 Check out the final application [here](https://moskv08.github.io/vite-3dglobe-threejs/).
 
