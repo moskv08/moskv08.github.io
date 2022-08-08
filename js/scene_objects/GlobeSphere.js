@@ -23,8 +23,6 @@ export default function GlobeSphere(scene, mouse) {
   group.add(sphere)
   scene.add(group);
 
-  // const mouse = { x: 0, y: 0 }
-
   function animate() {
     // requestAnimationFrame(animate)
     // renderer.render(scene, camera)
