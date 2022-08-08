@@ -1,10 +1,7 @@
 import * as THREE from 'three';
-import gsap from 'gsap';
 
 export default function StarVertice(scene) {
 
-  // Create Star Points
-  // ------------------
   const starGeometry = new THREE.BufferGeometry(5, 50, 50);
   const starMaterial = new THREE.PointsMaterial({ color: 0xffffff });
   const stars = new THREE.Points(starGeometry, starMaterial);
