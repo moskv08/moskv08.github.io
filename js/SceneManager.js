@@ -7,6 +7,7 @@
 */
 import * as THREE from 'three';
 import gsap from 'gsap';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { GlobeSphere, AtmoSphere, StarVertice } from './scene_objects/SceneSubjects';
 
 export default function SceneManager(canvas) {
@@ -16,9 +17,17 @@ export default function SceneManager(canvas) {
   const scene = buildScene();
   const renderer = buildRender(canvas);
   const camera = buildCamera(canvas);
-  const sceneSubjects = createSceneSubjects(scene, mouse);
+  const orbit = buildOrbit(camera);
+
+  const sceneSubjects = [
+    new GlobeSphere(scene, mouse),
+    new AtmoSphere(scene),
+    new StarVertice(scene)
+  ];
 
   camera.position.z = 15;
+  orbit.update();
+
 
   function buildScene() {
     const scene = new THREE.Scene();
@@ -50,15 +59,27 @@ export default function SceneManager(canvas) {
     return camera;
   }
 
-  function createSceneSubjects(scene, mouse) {
-    const sceneSubjects = [
-      new GlobeSphere(scene, mouse),
-      new AtmoSphere(scene),
-      new StarVertice(scene)
-    ];
+  function buildOrbit(camera) {
+    const orbitControl = new OrbitControls(camera, canvas);
 
-    return sceneSubjects;
-  }
+    orbitControl.autoRotate = true;
+    orbitControl.autoRotateSpeed = 0.2;
+    orbitControl.enableDamping = false;
+    orbitControl.enableZoom = false;
+    orbitControl.enabled = false;
+
+    return orbitControl;
+  };
+
+  // function createSceneSubjects(scene, mouse) {
+  //   const sceneSubjects = [
+  //     new GlobeSphere(scene, mouse),
+  //     new AtmoSphere(scene),
+  //     new StarVertice(scene)
+  //   ];
+
+  //   return sceneSubjects;
+  // }
 
   this.onWindowResize = function () {
     const { width, height } = canvas;
@@ -86,6 +107,9 @@ export default function SceneManager(canvas) {
 
   // Calls the update() function of every SceneSubject
   this.update = function () {
+
+    orbit.update();
+
     for (let i = 0; i < sceneSubjects.length; i++)
       sceneSubjects[i].update();
 
