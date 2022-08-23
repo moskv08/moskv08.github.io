@@ -26,7 +26,7 @@ export default function GlobeSphere(scene, mouse) {
   function animate() {
     // requestAnimationFrame(animate)
     // renderer.render(scene, camera)
-    sphere.rotation.y += 0.002
+    sphere.rotation.y += 0.0005
 
     gsap.to(group.rotation, {
       x: mouse.y * 0.1,

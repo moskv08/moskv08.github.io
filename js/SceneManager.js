@@ -63,7 +63,7 @@ export default function SceneManager(canvas) {
     const orbitControl = new OrbitControls(camera, canvas);
 
     orbitControl.autoRotate = true;
-    orbitControl.autoRotateSpeed = 0.2;
+    orbitControl.autoRotateSpeed = 0.05;
     orbitControl.enableDamping = false;
     orbitControl.enableZoom = false;
     orbitControl.enabled = false;
